@@ -154,7 +154,7 @@
     return;
   }
 
-  CGFloat baseLineOffset = maximumLineHeight / 2.0 - maximumFontLineHeight / 2.0;
+  CGFloat baseLineOffset = (maximumLineHeight - maximumFontLineHeight) / 4.0;
 
   [attributedText addAttribute:NSBaselineOffsetAttributeName
                          value:@(baseLineOffset)
@@ -290,7 +290,7 @@
         RCTRoundPixelValue(attachmentSize.width),
         RCTRoundPixelValue(attachmentSize.height)
       }};
-      
+
       NSRange truncatedGlyphRange = [layoutManager truncatedGlyphRangeInLineFragmentForGlyphAtIndex:range.location];
       BOOL viewIsTruncated = NSIntersectionRange(range, truncatedGlyphRange).length != 0;
 
@@ -396,7 +396,7 @@ static YGSize RCTTextShadowViewMeasure(YGNodeRef node, float width, YGMeasureMod
   CGFloat epsilon = 0.001;
   return (YGSize){
     RCTYogaFloatFromCoreGraphicsFloat(size.width + epsilon),
-    RCTYogaFloatFromCoreGraphicsFloat(size.height + epsilon)
+    RCTYogaFloatFromCoreGraphicsFloat(ceil(size.height + epsilon))
   };
 }
 
